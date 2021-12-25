@@ -1,2 +1,2 @@
-echo "Hello world Georg" > test01.txt
+echo "Hello world Georg 01" > test01.txt
 

@@ -1,2 +1,2 @@
-echo  ' sh script aus scripts/seed-database--sh'
+echo  " sh script aus scripts/seed-database--sh'"
 
