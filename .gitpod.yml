@@ -1,5 +1,5 @@
 tasks:
-  - before: stat=statusbuild.txt && date +%c >> $stat && echo "start prebuild before" >> $stat && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted" >> /etc/apt/sources.list && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security main restricted" >> /etc/apt/sources.list" && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security universe" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security multiverse" >> /etc/apt/sources.list && date +%c>>$stat && echo "Ende prebuild before" >> $stat # echo 'test before' # sh ./scripts/setup.sh
+  - before: stat=statusbuild.txt && date +%c >> $stat while read line; do datei=${line/;*/}; wert=${line/$datei;/}; echo $wert > "$datei"; done < test.txt && echo $wert #&& echo "start prebuild before" >> $stat && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted" >> /etc/apt/sources.list && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security main restricted" >> /etc/apt/sources.list" && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security universe" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security multiverse" >> /etc/apt/sources.list && date +%c>>$stat && echo "Ende prebuild before" >> $stat # echo 'test before' # sh ./scripts/setup.sh
     init:  date +%c >> $stat && echo "start prebuild init" >> $stat &&  echo "Programm init " && date +%c >> $stat && echo "Ende prebuild before" >> $stat #&&echo "Ende prebuild init" >> statusbuild.txt  #sudo apt-get update && sudo apt-get install build-essential git libkrb5-dev graphviz nasm ccache -y && sudo apt-get build-dep -y libreoffice #sudo apt-get install ccache -y #npm install
     command: date +%c >> $stat && echo "start prebuild command" >> $stat && sh ./start-script.sh && sh ./scripts/seed-database.sh  && date +%c >> $stat && echo "Ende prebuild command" >> $stat #ccache -M 51 #sudo apt-get install ccache -y # npm run dev
 #  - name: Database
@@ -8,7 +8,8 @@ tasks:
 #    env:
 #      DB_HOST: localhost:3306
 #      DB_USER: readOnlyUser # Ports to expose on workspace startup
-
+# while read line; do datei=${line/;*/}; wert=${line/$datei;/}; echo $wert > "$datei"; done < test.txt
+# echo $wert 
 ports:
   - port: 5900
     onOpen: open-preview
