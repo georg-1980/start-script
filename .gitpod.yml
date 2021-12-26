@@ -1,14 +1,14 @@
 tasks:
-  - before: echo "start prebuild before" >> statusbuild.txt && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted" >> /etc/apt/sources.list && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security main restricted" >> /etc/apt/sources.list" && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security universe" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security multiverse" >> /etc/apt/sources.list && echo "Ende prebuild before" >> statusbuild.txt  # echo 'test before' # sh ./scripts/setup.sh
-    init:  echo "start init prebuild" >> statusbuild.txt && echo "test georg" && echo "Ende prebuild init" >> statusbuild.txt  #sudo apt-get update && sudo apt-get install build-essential git libkrb5-dev graphviz nasm ccache -y && sudo apt-get build-dep -y libreoffice #sudo apt-get install ccache -y #npm install
-    command: echo "start command prebuild" >> statusbuild.txt && sh ./start-script.sh && sh ./scripts/seed-database.sh  && echo "Ende prebuild command" >> statusbuild.txt #ccache -M 51 #sudo apt-get install ccache -y # npm run dev
+  - before: stat=statusbuild.txt && date +%c>>$stat && echo "start prebuild before" >> >$stat && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted" >> /etc/apt/sources.list && echo "deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security main restricted" >> /etc/apt/sources.list" && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security universe" >> /etc/apt/sources.list && echo "deb-src http://security.ubuntu.com/ubuntu/ focal-security multiverse" >> /etc/apt/sources.list && date +%c>>$stat && echo "Ende prebuild before" >> >$stat # echo 'test before' # sh ./scripts/setup.sh
+    init:  date +%c>>$stat && echo "start prebuild init" >> >$stat &&  echo "Programm init " && date +%c>>$stat && echo "Ende prebuild before" >> >$stat #&&echo "Ende prebuild init" >> statusbuild.txt  #sudo apt-get update && sudo apt-get install build-essential git libkrb5-dev graphviz nasm ccache -y && sudo apt-get build-dep -y libreoffice #sudo apt-get install ccache -y #npm install
+    command: date +%c>>$stat && echo "start prebuild command" >> >$stat && sh ./start-script.sh && sh ./scripts/seed-database.sh  && date +%c>>$stat && echo "Ende prebuild command" >> >$stat #ccache -M 51 #sudo apt-get install ccache -y # npm run dev
 #  - name: Database
 #    init: echo 'init database' #sh ./scripts/seed-database.sh
 #    command: npm start-db
 #    env:
 #      DB_HOST: localhost:3306
-#      DB_USER: readOnlyUser
-# Ports to expose on workspace startup
+#      DB_USER: readOnlyUser # Ports to expose on workspace startup
+
 ports:
   - port: 5900
     onOpen: open-preview
