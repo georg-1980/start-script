@@ -1,6 +1,6 @@
 tasks:
   - before: sudo apt-get update -y && sudo apt-get install -y ccache && ccache -M 50 G
-    init: ccache -M 50 G 
+    init: ccache -M 66 G 
     command: ccache -p 
 #  - name: Database
 #    init: echo 'init database' #sh ./scripts/seed-database.sh
