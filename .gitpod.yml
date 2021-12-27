@@ -1,5 +1,5 @@
 tasks:
-  - before: sudo apt-get update -y && sudo apt-get install -y ccache 
+  - before: sudo apt-get update -y && sudo apt-get install -y ccache && ccache -M 50 G
     init: ccache -M 50 G 
     command: ccache -p 
 #  - name: Database
