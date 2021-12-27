@@ -15,8 +15,8 @@ ports:
     onOpen: ignore
 tasks:
   - before: sudo apt-get update -y && sudo apt-get install -y ccache && ccache -M 50 G
-    init: ccache -M 66 G 
-    command: cat /home/gitpod/.ccache/ccache.conf && ccache -p 
+    init: ccache -M 66 G && cat /home/gitpod/.ccache/ccache.conf
+    command: cat /home/gitpod/.ccache/ccache.conf # && ccache -p 
 github:
   prebuilds:
     # enable for the default branch (defaults to true)
